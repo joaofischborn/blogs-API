@@ -5,6 +5,12 @@ const { User } = require('../models');
 
 const getUser = async () => User.findAll({ attributes: { exclude: ['password'] } });
 
+const getUserById = async (id) => {
+    const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
+    if (user) return { type: null, message: user };
+    return { type: 404, message: 'User does not exist' };
+};
+
 const createUser = async ({ displayName, email, password, image }) => {
     User.create({ displayName, email, password, image });
 };
@@ -41,4 +47,4 @@ const validateNewUser = async (params) => {
     return token;
   };
 
-module.exports = { getUser, validateFields, validateNewUser, createUser };
+module.exports = { getUser, getUserById, validateFields, validateNewUser, createUser };
