@@ -10,5 +10,5 @@ routers.use('/login', loginRouter);
 routers.post('/user', userController.addNewUser);
 routers.get('/user', authMiddleware.validateToken, userController.getUser);
 routers.get('/user/:id', authMiddleware.validateToken, userController.getUserById);
-
+// 
 module.exports = routers;
