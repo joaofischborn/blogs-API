@@ -8,7 +8,6 @@ const routers = express.Router();
 
 routers.use('/login', loginRouter);
 routers.post('/user', userController.addNewUser);
-routers.use(authMiddleware.validateToken);
-routers.get('/user', userController.getUser);
+routers.get('/user', authMiddleware.validateToken, userController.getUser);
 
 module.exports = routers;
