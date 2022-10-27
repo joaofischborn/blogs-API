@@ -12,4 +12,3 @@ routers.use(authMiddleware.validateToken);
 routers.get('/user', userController.getUser);
 
 module.exports = routers;
-// AH
