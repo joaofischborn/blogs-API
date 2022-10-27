@@ -3,6 +3,8 @@ const jwtUtil = require('../utils/jwt.util');
 
 const { User } = require('../models');
 
+const getUser = async () => User.findAll({ attributes: { exclude: ['password'] } });
+
 const createUser = async ({ displayName, email, password, image }) => {
     User.create({ displayName, email, password, image });
 };
@@ -29,6 +31,7 @@ const validateFields = async (params) => {
 const validateNewUser = async (params) => {
     const { email } = params;
     const user = await User.findOne({ where: { email } });  
+    console.log(user);
 
     if (user) return { type: 409, message: 'User already registered' };
 
@@ -38,4 +41,4 @@ const validateNewUser = async (params) => {
     return token;
   };
 
-module.exports = { validateFields, validateNewUser, createUser };
+module.exports = { getUser, validateFields, validateNewUser, createUser };

@@ -1,10 +1,16 @@
 const userService = require('../services/user.service');
 
+const getUser = async (_req, res) => {
+    const users = await userService.getUser();
+    res.status(200).json(users);
+};
+
 const addNewUser = async (req, res) => {
     const { type, message } = await userService.validateFields(req.body);
     if (type) return res.status(400).json({ message });
 
     const token = await userService.validateNewUser(req.body);
+    console.log(token);
     
     if (!token.type) {
         await userService.createUser(req.body);
@@ -12,6 +18,5 @@ const addNewUser = async (req, res) => {
     }
     return res.status(409).json({ message: token.message });
 };
-//
 
-module.exports = { addNewUser };
+module.exports = { getUser, addNewUser };
