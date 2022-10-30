@@ -13,4 +13,6 @@ const insertNewCategory = async (params) => {
     return { type: null, message: params };
 };
 
-module.exports = { insertNewCategory };
+const getAllCategories = async () => Category.findAll();
+
+module.exports = { insertNewCategory, getAllCategories };

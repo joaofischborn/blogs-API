@@ -12,4 +12,5 @@ routers.post('/user', userController.addNewUser);
 routers.get('/user', authMiddleware.validateToken, userController.getUser);
 routers.get('/user/:id', authMiddleware.validateToken, userController.getUserById);
 routers.post('/categories', authMiddleware.validateToken, categoriesController.insertNewCategory);
+routers.get('/categories', authMiddleware.validateToken, categoriesController.getAllCategories);
 module.exports = routers;
